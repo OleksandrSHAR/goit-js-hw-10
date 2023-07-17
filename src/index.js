@@ -19,11 +19,11 @@ body.style.backgroundImage =
 
 breedSelect.addEventListener('imput',imputBreed)
 function imputBreed(e) {
-  e.fetchBreeds
+  
 }
 
 
-function catBreed(items) {
+function etchBreedsBre(items) {
     const breedList = items.map(({ url, id, wikipedia_url, temperament, breeds }) => {
         return `
         <img src="${url}" alt="${id}">
