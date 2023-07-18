@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.headers.common["x-api-key"] = "live_E5iLB6lkwpo1ELiOf9rMpBJuuGUlUje6JIpXeVXjQpEBRXCoPT9J3vZs9JTCIWhE";
+axios.defaults.headers.common["x-api-key"] = "live_hAPwe9T2sAFqIdAaEVWLWnLgPvoQnZJvaq8wz7DiapKWYNWcPv75pqIDfZxNu5yC";
 import { fetchBreeds} from "./cat-api";
 import {fetchBreedsCat} from "./cat-api";
 
