@@ -1,30 +1,39 @@
-import axios from "axios";
-axios.defaults.headers.common["x-api-key"] = "live_hAPwe9T2sAFqIdAaEVWLWnLgPvoQnZJvaq8wz7DiapKWYNWcPv75pqIDfZxNu5yC";
-import { fetchBreeds} from "./cat-api";
-import {fetchBreedsCat} from "./cat-api";
 
- axios . isCancel ( fetchBreeds )
+import { fetchBreeds,fetchBreedsCat} from "./cat-api";
+
 const catInf = document.querySelector('.cat-info')
 const infError = document.querySelector('.error')
 const infLoad = document.querySelector('.loader')
 const breedSelect = document.querySelector('.breed-select')
-const body = document.querySelector('body')
 
+
+
+breedSelect.addEventListener('change',etchBreedsBre)
+
+   
 fetchBreeds().then(data => {
     catSelect(data)
+     
 })
+ .catch((error) =>
+ {
+    infError.removeAttribute("hidden")
+ console.log(error)}
+        )
+    .finally(() => {
+        infLoad.setAttribute("hidden", true)
+        
+    })
+
 function catSelect(items) {
     const breedColect = items.map(({ id, name }) => { return `<option value="${id}">${name}</option>` }).join('');
     breedSelect.innerHTML = breedColect;
 }
-body.style.backgroundImage =
-    infError.style.visibility = 'hidden';
-    infLoad.style.visibility = 'hidden';
 
-breedSelect.addEventListener('chenge',etchBreedsBre)
 
 function etchBreedsBre(e) {
-    infLoad.removeAttribute('hidden')
+     
+     infLoad.removeAttribute('hidden')
     fetchBreedsCat(e.target.value).then(data => {
         const imgCat = data.map(elem =>
             `<img src="${elem.url}" alt="cat" width="400"height="400"></img>`).join('')
@@ -33,8 +42,8 @@ function etchBreedsBre(e) {
             elem.breeds.forEach(cat => {
                 const array = [cat]
                 const findCat = array.find(option=>option.id===`${e.target.value}`)
-            const markur= `
-         
+                const markur = 
+            `
          <h1>${findCat.name}</h1>
         <p>${findCat.description}</p>
         <p>${findCat.temperament}</p>
@@ -43,9 +52,13 @@ function etchBreedsBre(e) {
             })
         }) 
     })
-        .catch(() => {
-        infError.removeAttribute('hidden')
-        })
-    .finally(()=>infLoad.setAttribute("hidden",true))
+        .catch((error) => {
+            infError.removeAttribute("hidden")
+        console.log(error)}
+        )
+        .finally(() => {
+            infLoad.setAttribute("hidden", true)
+           
+         })
 }
   
