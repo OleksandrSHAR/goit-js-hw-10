@@ -23,19 +23,29 @@ body.style.backgroundImage =
 
 breedSelect.addEventListener('chenge',etchBreedsBre)
 
-
 function etchBreedsBre(e) {
     infLoad.removeAttribute('hidden')
-    const breedList = fetchBreedsCat(e.target.value).then(data => data.map(({ url, name, description, temperament, breeds }) => {
-        return `
-        <img src="${url}" alt="cat" width="400"height="400">
-        <h1>${name}</h1>
-        <p>${description}</p>
-        <p>${temperament}</p>
+    fetchBreedsCat(e.target.value).then(data => {
+        const imgCat = data.map(elem =>
+            `<img src="${elem.url}" alt="cat" width="400"height="400"></img>`).join('')
+        catInf.innerHTML = imgCat
+        data.map(elem => {
+            elem.breeds.forEach(cat => {
+                const array = [cat]
+                const findCat = array.find(option=>option.id===`${e.target.value}`)
+            const markur= `
+         
+         <h1>${findCat.name}</h1>
+        <p>${findCat.description}</p>
+        <p>${findCat.temperament}</p>
         `
-    })).join('');
-    
-    catInf.innerHTML = breedList;
-    return breedList;
-    
-}   
+          catInf.insertAdjacentHTML("beforeend",markur)      
+            })
+        }) 
+    })
+        .catch(() => {
+        infError.removeAttribute('hidden')
+        })
+    .finally(()=>infLoad.setAttribute("hidden",true))
+}
+  
