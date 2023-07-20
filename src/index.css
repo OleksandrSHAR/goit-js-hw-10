@@ -2,6 +2,7 @@ body {
   background-color: black;
 }
 .error {
+  display: none;
   color: red;
 }
 .loader {
@@ -14,6 +15,7 @@ body {
 }
 
 .breed-select {
+  display: none;
   background-color: rgb(245, 247, 227);
   border-radius: 10px;
   width: 150px;

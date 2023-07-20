@@ -11,22 +11,22 @@ breedSelect.addEventListener('change', etchBreedsBre)
  
    
 fetchBreeds().then(data => {
-     
-    catSelect(data)
-       
+catSelect(data)      
 })
  .catch((error) =>
  { 
-    infError.removeAttribute("hidden")
+    infError.style.display = 'block'
  console.log(error)}
         )
     .finally(() => {
         infLoad.setAttribute("hidden", true)
-        
+        breedSelect.style.display = 'block'
         
     })
 
 function catSelect(items) {
+    
+    
     const breedColect = items.map(({ id, name }) => { return `<option value="${id}">${name}</option>` }).join('');
     breedSelect.innerHTML = breedColect;
 }
@@ -34,10 +34,8 @@ function catSelect(items) {
        
      
   
-function etchBreedsBre(e) {
-       
-    infLoad.removeAttribute('hidden')
-      
+function etchBreedsBre(e) { 
+    infLoad.removeAttribute('hidden') 
     fetchBreedsCat(e.target.value).then(data => {
         
         const imgCat = data.map(elem =>
@@ -47,6 +45,10 @@ function etchBreedsBre(e) {
         data.map(elem => {
             elem.breeds.forEach(cat => {
                 const array = [cat]
+                console.log(array)
+                // if (array===null) {
+                //   infError.style.display = 'block'  
+                // }
                 const findCat = array.find(option => option.id === `${e.target.value}`)
                 
                 const markur = 
@@ -58,12 +60,12 @@ function etchBreedsBre(e) {
                 catInf.insertAdjacentHTML("beforeend", markur)   
                 
             })
-        }) 
+        })  
         
     })
         .catch((error) => {
         
-            infError.removeAttribute("hidden")
+            infError.style.display = 'block'
         console.log(error)}
         )
         .finally(() => {
